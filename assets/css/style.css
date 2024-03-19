@@ -33,7 +33,7 @@
   border-bottom: 1px solid #D9FFF5;
 }
 
-.header__col {
+.header-col {
   display: flex;
   align-items: center;
 }
