@@ -432,3 +432,9 @@
   line-height: 32px;
   letter-spacing: -0.6px;
 }
+
+@media (max-height:768px) {
+  .burger-menu_aside {
+  height: inherit;
+  }
+}
