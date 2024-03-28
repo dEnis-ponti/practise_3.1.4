@@ -344,3 +344,9 @@
     width: 531px;
   }
 }
+
+/* Burger menu */
+
+.burger-menu_aside {
+  max-width: 320px;
+}
