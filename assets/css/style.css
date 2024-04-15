@@ -438,3 +438,31 @@
   height: inherit;
   }
 }
+
+/* Brands */
+
+.brands__list {
+  display: flex;
+  flex-wrap: wrap;
+  max-width: 1200px;
+  gap: 20px;
+}
+
+.brands__link {
+  display: flex;
+  align-items: center;
+  width: 240px;
+  justify-content: space-between;
+}
+
+.brands__logo {
+  content: url('/assets/img/brand-1.png');
+  display: block;
+}
+.brands__link::after {
+  content: url('/assets/img/brand-more.svg');
+  display: block;
+  border-radius: 60px;
+  border: red 3px solid;
+  padding: 8px 13px 8px 15px;;
+}
