@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="./assets/css/reset.css">
     <link rel="stylesheet" href="./assets/css/fonts.css">
     <link rel="stylesheet" href="./assets/css/style.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
 </head>
 
 <body class="body">
@@ -16,15 +17,24 @@
             <h1 class="brands__headline">Ремонт техники различных брендов</h1>
         </div>
         <div class="brands__slider">
+            <template id="brand-template">    
+                <li class="brands__item">
+                    <a class="brands__link" href="#">
+                        <img src="./assets/img/brand-1.png" alt=""
+                    class="brands__logo">
+                    </a>
+                </li>
+            </template>
+            <template id="swiper-template">
+
+            </template>
             <ul class="brands__list list-reset">
-                <li class="brands__item"><a class="brands__link" href="#"><img src="./assets/img/brand-1.png" alt=""
-                            class="brands__logo"></a></li>
-                <!-- <template id="brand-template">
-                </template> -->
             </ul>
-            <button class="show-more-btn link">Показать все</button>
+            <button class="brands__show-more show-more-btn link">Показать все</button>
+            <div class="swiper-pagination"></div>
         </div>
     </section>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <script src="./assets/js/script.js"></script>
 </body>
 
