@@ -3,7 +3,7 @@ document.addEventListener('DOMContentLoaded', function () {
     let brandsSliderMobile = document.querySelector('.brands__slider-mobile');
     let brandsList = document.querySelector('.brands__list');
     let brandsListMobile = brandsSliderMobile.querySelector('.brands__list');
-    console.log(brandsListMobile);
+
     let brandsItems = brandsList.children;
     let brandsItemsMobile = brandsListMobile.children;
     let brandItemTemplateMobile = document.querySelector('#swiper-template').content.querySelector('.brands__item');
@@ -38,7 +38,7 @@ document.addEventListener('DOMContentLoaded', function () {
     let adjustSliderItems = function () {
         let screenWidth = window.innerWidth;
         if (screenWidth >= 1120) {
-            setSliderItems(8);
+            setSliderItems(7);
         } else if (screenWidth >= 768) {
             setSliderItems(5);
         } else if (screenWidth < 768) {
@@ -54,6 +54,7 @@ document.addEventListener('DOMContentLoaded', function () {
         if (screenWidth < 768) {
             console.log('swiper is initialized');
             const swiper = new Swiper('.mySwiper', {
+                
                 slidesPerView: 1.5,
                 spaceBetween: 16,
                 centerInsufficientSlides: false,
@@ -66,6 +67,8 @@ document.addEventListener('DOMContentLoaded', function () {
                     el: '.swiper-pagination',
                     clickable: true
                 },
+                slideToClickedSlide: true,
+                draggable: true, 
 
             });
         }
