@@ -498,7 +498,7 @@
   display: block;
 }
 .brands__link::after {
-  content: url('/assets/img/brand-more.svg');
+  content: url('../assets/img/brand-more.svg');
   display: block;
   border-radius: 60px;
   border: red 3px solid;
