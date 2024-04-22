@@ -1,20 +1,37 @@
 document.addEventListener('DOMContentLoaded', function () {
-    let brandsSlider = document.querySelector('.brands__slider')
+    let brandsSlider = document.querySelector('.brands__slider');
+    let brandsSliderMobile = document.querySelector('.brands__slider-mobile');
     let brandsList = document.querySelector('.brands__list');
+    let brandsListMobile = brandsSliderMobile.querySelector('.brands__list');
+    console.log(brandsListMobile);
     let brandsItems = brandsList.children;
+    let brandsItemsMobile = brandsListMobile.children;
+    let brandItemTemplateMobile = document.querySelector('#swiper-template').content.querySelector('.brands__item');
     let brandItemTemplate = document.querySelector('#brand-template').content;
     let brandItem = brandItemTemplate.querySelector('.brands__item');
     let showMoreBtn = document.querySelector('.show-more-btn');
     let showMoreBtnText = showMoreBtn.textContent;
 
     let setSliderItems = function (numOfElems) {
-        for (let i = brandsItems.length; i <= numOfElems; i++) {
-            let brandItemDuplicate = brandItem.cloneNode(true);
-            brandsList.appendChild(brandItemDuplicate);
-            let brandLogo = brandsItems[i].querySelector('.brands__logo');
-            let brandLogoSrc = brandLogo.src;
-            let validBrandLogoSrc = brandLogoSrc.replace('brand-1.png', 'brand-' + (i + 1) + '.png');
-            brandLogo.src = validBrandLogoSrc;
+        let screenWidth = window.innerWidth;
+        if (screenWidth >= 768) {
+            for (let i = brandsItems.length; i <= numOfElems; i++) {
+                let brandItemDuplicate = brandItem.cloneNode(true);
+                brandsList.appendChild(brandItemDuplicate);
+                let brandLogo = brandsItems[i].querySelector('.brands__logo');
+                let brandLogoSrc = brandLogo.src;
+                let validBrandLogoSrc = brandLogoSrc.replace('brand-1.png', 'brand-' + (i + 1) + '.png');
+                brandLogo.src = validBrandLogoSrc;
+            }
+        } else if (screenWidth < 768) {
+            for (let i = brandsItemsMobile.length; i <= numOfElems; i++) {
+                let brandItemDuplicate = brandItemTemplateMobile.cloneNode(true);
+                brandsListMobile.appendChild(brandItemDuplicate);
+                let brandLogo = brandsItemsMobile[i].querySelector('.brands__logo');
+                let brandLogoSrc = brandLogo.src;
+                let validBrandLogoSrc = brandLogoSrc.replace('brand-1.png', 'brand-' + (i + 1) + '.png');
+                brandLogo.src = validBrandLogoSrc;
+            }
         }
     };
 
@@ -23,9 +40,9 @@ document.addEventListener('DOMContentLoaded', function () {
         if (screenWidth >= 1120) {
             setSliderItems(8);
         } else if (screenWidth >= 768) {
-            setSliderItems(6);
-        } else {
-            setSliderItems(9)
+            setSliderItems(5);
+        } else if (screenWidth < 768) {
+            setSliderItems(8)
         }
     }
     adjustSliderItems();
@@ -35,14 +52,11 @@ document.addEventListener('DOMContentLoaded', function () {
 
         let screenWidth = window.innerWidth;
         if (screenWidth < 768) {
-
-            brandsSlider.classList.add('swiper', 'mySwiper');
-            brandsList.classList.add('swiper-wrapper');
-            for (let i = 0; i < brandsItems.length; i++) {
-                brandsItems[i].classList.add('swiper-slide');
-            }
             console.log('swiper is initialized');
             const swiper = new Swiper('.mySwiper', {
+                slidesPerView: 1.5,
+                spaceBetween: 16,
+                centerInsufficientSlides: false,
                 // Optional parameters
                 direction: 'horizontal',
                 loop: true,
@@ -50,19 +64,29 @@ document.addEventListener('DOMContentLoaded', function () {
                 // If we need pagination
                 pagination: {
                     el: '.swiper-pagination',
+                    clickable: true
                 },
 
             });
-        } else if (screenWidth >= 768) {
-            brandsSlider.classList.remove('swiper', 'mySwiper');
-            brandsList.classList.remove('swiper-wrapper');
-            for (let i = 0; i < brandsItems.length; i++) {
-                brandsItems[i].classList.remove('swiper-slide');
-            }
-
         }
     }
-    window.addEventListener('resize', initializeSwiper);
+    initializeSwiper();
+    let validateSlider = function () {
+        let screenWidth = window.innerWidth;
+        if (screenWidth < 768) {
+            brandsSlider.classList.add('brands__slider--hide');
+            brandsSlider.classList.remove('brands__slider--show');
+            brandsSliderMobile.classList.remove('brands__slider-mobile--hide');
+            brandsSliderMobile.classList.add('brands__slider-mobile--show');
+        } else if (screenWidth >= 768) {
+            brandsSlider.classList.add('brands__slider--show');
+            brandsSlider.classList.remove('brands__slider--hide');
+            brandsSliderMobile.classList.add('brands__slider-mobile--hide');
+            brandsSliderMobile.classList.remove('brands__slider-mobile--show');
+        }
+    }
+    validateSlider();
+    window.addEventListener('resize', validateSlider);
 
     showMoreBtn.addEventListener('click', function () {
         if (!showMoreBtn.classList.contains('show-more-btn--active')) {
